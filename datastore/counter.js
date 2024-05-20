@@ -40,6 +40,8 @@ const writeCounter = (count, callback) => {
 
 exports.getNextUniqueId = () => {
   counter = counter + 1;
+  writeCounter(counter, (err, counterString) => {
+  });
   return zeroPaddedNumber(counter);
 };
 
@@ -48,3 +50,9 @@ exports.getNextUniqueId = () => {
 // Configuration -- DO NOT MODIFY //////////////////////////////////////////////
 
 exports.counterFile = path.join(__dirname, 'counter.txt');
+
+readCounter((err, storedCount) => {
+  counter = storedCount;
+}); //REFACTOR THIS!!
+
+setTimeout(() => console.log('check', exports.getNextUniqueId()), 2000);
